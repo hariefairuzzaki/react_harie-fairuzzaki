@@ -1,0 +1,23 @@
+#about a {
+  text-decoration: none;
+  color: black;
+}
+
+#footer a {
+  text-decoration: none;
+  color: white;
+}
+
+#about a:hover,
+#footer a:hover {
+  text-decoration: underline;
+}
+
+#feature ul {
+  padding-left: 17px;
+  list-style: url(../img/chevron-right.svg);
+}
+
+#footer ul {
+  padding-left: 0 !important;
+}
