@@ -1,8 +1,8 @@
-var a = 5;
+let a = 5;
 let b = "kampus merdeka";
-const nama = "Budi";
+let nama = "Budi";
 let terdaftar = true;
-let lengkap_arr = [a, b, nama, terdaftar];
+let lengkapArr = [a, b, nama, terdaftar];
 
 function perkenalan() {
   let asal = "indonesia";
@@ -19,7 +19,7 @@ a = b;
 // nama = b;
 
 perkenalan();
-console.log("array = " + lengkap_arr[2]);
+console.log("array = " + lengkapArr[2]);
 // console.log("asal diakses = " + asal);
 console.log("a adalah = " + a);
 console.log("b adalah = " + b);

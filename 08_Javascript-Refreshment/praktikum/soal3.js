@@ -1,6 +1,6 @@
-const foo = ["Budi", "Sita", "Ayu"];
+let foo = ["Budi", "Sita", "Ayu"];
 
-const [a, b, c] = foo;
+let [a, b, c] = foo;
 
 console.log({ a });
 console.log({ b });
