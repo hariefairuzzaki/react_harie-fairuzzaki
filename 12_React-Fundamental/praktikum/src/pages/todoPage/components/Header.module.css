@@ -1,0 +1,10 @@
+.header {
+  margin-left: 10px;
+}
+
+hr {
+  height: 5px;
+  background-color: rgb(216, 216, 216);
+  border: none;
+  margin-bottom: 25px;
+}
