@@ -1,31 +1,51 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import data from "../data.json";
 import ToDoInput from "./components/ToDoInput";
 import ToDoList from "./components/ToDoList";
 
-export default function TodoApp() {
-  const [datas, setDatas] = useState(data);
+export default class TodoApp extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { data, userInput: "" };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleCheckbox = this.handleCheckbox.bind(this);
+  }
 
-  const handleDelete = (id) => {
-    let deleted = datas.filter((task) => task.id !== id);
-    setDatas(deleted);
+  handleChange = (e) => {
+    this.setState({ userInput: e.target.value });
   };
 
-  const addTodo = (userInput) => {
-    let newTodo = [...datas];
-    newTodo = [...newTodo, { id: datas.length + 1, title: userInput, completed: false }];
-    setDatas(newTodo);
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.setState(({ userInput }) =>
+      userInput
+        ? {
+            data: [...this.state.data, { id: this.state.data.length + 1, title: userInput, completed: false }],
+            userInput: "",
+          }
+        : alert("To Do Kosong")
+    );
   };
 
-  const handleCheckbox = (item) => {
-    let todos = datas.map((e) => (e.id === item.id ? { ...e, completed: !e.completed } : e));
-    setDatas(todos);
+  handleDelete = (id) => {
+    this.setState({ data: this.state.data.filter((task) => task.id !== id) });
   };
 
-  return (
-    <>
-      <ToDoInput addTodo={addTodo} />
-      <ToDoList todoList={datas} handleDelete={handleDelete} handleCheckbox={handleCheckbox} />
-    </>
-  );
+  handleCheckbox = (item) => {
+    this.setState({ data: this.state.data.map((el) => (el.id === item.id ? { ...el, completed: !el.completed } : el)) });
+    console.log(item);
+  };
+
+  render() {
+    const { userInput } = this.state;
+
+    return (
+      <>
+        <ToDoInput userInput={userInput} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+        <ToDoList todoList={this.state.data} handleDelete={this.handleDelete} handleCheckbox={this.handleCheckbox} />
+      </>
+    );
+  }
 }
