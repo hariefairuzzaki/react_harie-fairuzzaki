@@ -12,9 +12,8 @@ export default function TodoApp() {
   };
 
   const addTodo = (userInput) => {
-    let newTodo = [...datas];
-    newTodo = [...newTodo, { id: datas.length + 1, title: userInput, completed: false }];
-    setDatas(newTodo);
+    const newTodo = { id: datas.length + 1, title: userInput, completed: false };
+    setDatas((state) => [...state, newTodo]);
   };
 
   const handleCheckbox = (item) => {
