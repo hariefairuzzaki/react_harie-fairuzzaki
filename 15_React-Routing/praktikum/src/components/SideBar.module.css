@@ -1,0 +1,20 @@
+.offcanvas {
+  background-color: #3a8b8c !important;
+}
+
+.offcanvas a {
+  font-size: large;
+  font-weight: 500;
+  color: #6ef7d1;
+  text-decoration: none;
+}
+
+.offcanvas a:hover {
+  color: #6ef7d0d0;
+  text-decoration: none;
+}
+
+.offcanvas a:active {
+  color: #6ef7d042;
+  text-decoration: none;
+}
