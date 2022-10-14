@@ -1,0 +1,10 @@
+.text {
+  text-align: center;
+  font-size: 80px;
+  font-weight: bold;
+  color: #ffff00;
+  background-image: -webkit-linear-gradient(0deg, #ffae00af 47%, #00ff00bb 50%, #0278ffbb 53%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
