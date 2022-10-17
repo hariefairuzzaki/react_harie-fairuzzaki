@@ -1,0 +1,15 @@
+{
+  "data": {
+    "insert_keterangan": {
+      "returning": [
+        {
+          "id": 6,
+          "id_anggota": 3,
+          "pelajaran": "React",
+          "nilai": 55,
+          "status": false
+        }
+      ]
+    }
+  }
+}
