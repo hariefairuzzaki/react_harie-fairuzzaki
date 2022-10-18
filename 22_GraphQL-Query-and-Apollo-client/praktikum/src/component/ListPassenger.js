@@ -1,6 +1,17 @@
-import { gql, useLazyQuery } from "@apollo/client";
+import { gql, useLazyQuery, useQuery } from "@apollo/client";
 import { useState } from "react";
 import ListItem from "./ListItem";
+
+const GetUser = gql`
+  query MyQuery {
+    pengunjung {
+      id
+      nama
+      umur
+      jenisKelamin
+    }
+  }
+`;
 
 const GetByUserId = gql`
   query MyQuery($id: String) {
@@ -14,42 +25,49 @@ const GetByUserId = gql`
 `;
 
 const ListPassenger = (props) => {
-  const [getData, { loading, error, data }] = useLazyQuery(GetByUserId);
-  const [dataId, setDataId] = useState(0);
-
-  if (loading) return <p>Loading ...</p>;
-  if (error) return `Error! ${error}`;
+  const { loading: userLoading, error: userError, data: userData } = useQuery(GetUser);
+  const [getData, { loading: userByIdLoading, error: userByIdError, data: userByIdData }] = useLazyQuery(GetByUserId);
+  const [userId, setUserId] = useState(0);
 
   const handleGetData = () => {
     getData({
       variables: {
-        id: dataId,
+        id: userId,
       },
     });
   };
 
   const handleChangeDataId = (e) => {
     if (e.target) {
-      setDataId(e.target.value);
+      setUserId(e.target.value);
     }
   };
+
+  if (userLoading || userByIdLoading) return <p>Loading ...</p>;
+  if (userError || userByIdError) return <p>Something went wrong ...</p>;
 
   return (
     <div>
       <div style={{ margin: "20px" }}>
-        <input value={dataId} onChange={handleChangeDataId} style={{ marginRight: "5px" }} />
+        <input value={userId} onChange={handleChangeDataId} style={{ marginRight: "5px" }} />
         <button onClick={handleGetData}>Get Data</button>
       </div>
       <table cellPadding="5px" cellSpacing="0" style={{ margin: "auto" }}>
         <thead bgcolor="red">
-          <td>Nama</td>
-          <td>Umur</td>
-          <td>Jenis Kelamin</td>
-          <td bgcolor="white" className="removeBorder"></td>
+          <tr>
+            <td>Nama</td>
+            <td>Umur</td>
+            <td>Jenis Kelamin</td>
+            <td bgcolor="white" className="removeBorder"></td>
+          </tr>
         </thead>
-        {data?.pengunjung.map((item) => (
-          <ListItem key={item.id} data={item} hapusPengunjung={props.hapusPengunjung} />
-        ))}
+        {userByIdData
+          ? userByIdData?.pengunjung.map((item) => (
+              <ListItem key={item.id} data={item} hapusPengunjung={props.hapusPengunjung} />
+            ))
+          : userData?.pengunjung.map((item) => (
+              <ListItem key={item.id} data={item} hapusPengunjung={props.hapusPengunjung} />
+            ))}
       </table>
     </div>
   );
