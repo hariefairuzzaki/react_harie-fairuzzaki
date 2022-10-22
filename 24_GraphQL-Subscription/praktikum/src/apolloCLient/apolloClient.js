@@ -13,7 +13,7 @@ const httpLink = new HttpLink({
 
 const wsLink = new GraphQLWsLink(
   createClient({
-    url: "wss://polite-flounder-94.hasura.app/v1/graphql",
+    url: "ws://polite-flounder-94.hasura.app/v1/graphql",
     connectionParams: {
       headers: {
         "x-hasura-admin-secret": "tLMyPk1rN9VQUiEeDwP5StLDddHm3XTM9Pm7gXpQzkbwLGpvQokYgrE4a7ODfR3P",
